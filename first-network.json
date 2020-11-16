@@ -1,0 +1,57 @@
+{
+	"name": "first-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "DefaultMSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"defaultchannel": {
+			"peers": {
+				"default.com": {}
+			},
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		}
+	},
+	"organizations": {
+		"DefaultMSP": {
+			"mspid": "DefaultMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/default.com/users/Admin@default.com/msp/keystore/priv_sk"
+			},
+			"peers": ["default.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/default.com/users/Admin@default.com/msp/signcerts/Admin@default.com-cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.org1.example.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/default.com/peers/default/tls/ca.crt"
+			},
+			"url": "grpcs://default.com:7051"
+		}
+	}
+}

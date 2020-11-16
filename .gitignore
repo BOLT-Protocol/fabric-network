@@ -1,0 +1,17 @@
+.DS_Store
+
+# Ctypto materail
+temp
+crypto-config
+artefacts/*
+
+# Fabcar example
+fabcar
+
+# Peer storage
+bins/orderer/ledger
+bins/peer/ledger
+
+# CA storage
+ca/server/*
+ca/client/*
