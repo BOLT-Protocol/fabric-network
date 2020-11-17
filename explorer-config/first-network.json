@@ -49,7 +49,7 @@
 	"peers": {
 		"default.com": {
 			"tlsCACerts": {
-				"path": "/tmp/crypto/peerOrganizations/default.com/peers/default/tls/ca.crt"
+				"path": "/tmp/crypto/peerOrganizations/default.com/peers/devpeer/tls/ca.crt"
 			},
 			"url": "grpc://10.110.203.155:7051"
 		}
