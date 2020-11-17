@@ -10,6 +10,10 @@
 
     ```./gen-genesis-channeltx.sh```
 
-***step2. 開啟節點 ***
-1. ./bins/orderer/launch.sh
+***step2. 開啟節點***
+1. ./bins/orderer/launch.sh &
 2. ./bins/peer/launch.sh &
+
+
+killall peer
+killall orderer

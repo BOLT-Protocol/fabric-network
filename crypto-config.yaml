@@ -1,3 +1,5 @@
+# The default template
+# If edit this file, should edit gen-crypto.sh either
 
 OrdererOrgs:
   - Name: Orderer
@@ -7,12 +9,12 @@ OrdererOrgs:
       - Hostname: orderer
       
 PeerOrgs:
-  - Name: default
+  - Name: Default
     Domain: default.com
     #EnableNodeOUs: true
     Specs:
       - Hostname: default
-        CommonName: default
+        CommonName: devpeer
     Users:
       Count: 1
 

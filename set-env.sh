@@ -1,10 +1,11 @@
 # Make sure that IP Addresses are setup properly
 # Use PUBLIC IP Here
 
+# Edit this
+export ORDERER_ADDRESS=<ORDERER_ADDRESS>
 
-export ORDERER_ADDRESS=3.101.69.212:7050
-
-export DEFAULT_EP=3.101.69.212:7051
+# Edit this
+export DEFAULT_EP=<PEER_ADDRESS>
 
 
 FABRIC_CFG_PATH=$PWD

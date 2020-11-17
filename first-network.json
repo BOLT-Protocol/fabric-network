@@ -47,11 +47,11 @@
 		}
 	},
 	"peers": {
-		"peer0.org1.example.com": {
+		"default.com": {
 			"tlsCACerts": {
 				"path": "/tmp/crypto/peerOrganizations/default.com/peers/default/tls/ca.crt"
 			},
-			"url": "grpcs://default.com:7051"
+			"url": "grpc://10.110.203.155:7051"
 		}
 	}
 }

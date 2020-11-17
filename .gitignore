@@ -15,3 +15,5 @@ bins/peer/ledger
 # CA storage
 ca/server/*
 ca/client/*
+
+blockchain-explorer

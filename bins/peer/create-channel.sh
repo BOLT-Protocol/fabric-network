@@ -1,4 +1,5 @@
 # Orderer Address env variable is getting set in the set-env.sh
+source $PWD/bins/peer/set-env.sh
 
 export CHANNEL_TX_FILE=${PWD}/artefacts
 

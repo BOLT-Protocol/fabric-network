@@ -6,4 +6,5 @@ cp -r $PWD/crypto-config/peerOrganizations $PWD/$EXPLORER/examples/net1/crypto/
 
 cd $EXPLORER
 
-docker-compose up -d
+docker-compose up
+docker ps

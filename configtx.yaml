@@ -54,7 +54,7 @@ Organizations:
           # Any member can act as an endorser
           Rule: "OR('DefaultMSP.member')"
     AnchorPeers:
-      - Host: "{{ORDERER_ADDRESS}}"
+      - Host: peer.default.com
         Port: 7051
 
   
@@ -67,7 +67,7 @@ Orderer: &OrdererDefaults
 
   Addresses:
     # UPDATE THE IP ADDRESS
-    - "{{ORDERER_ADDRESS}}:7050"
+    -  10.110.203.155:7050
 
   # EtcdRaft:
   #     Consenters:
@@ -247,12 +247,6 @@ Profiles:
 
             Organizations:
                 - <<: *Default
-
-                 
-
-      
-                                
-                  
   DefaultChannel:
     <<: *ChannelDefaults
     Consortium: DefaultConsortium
