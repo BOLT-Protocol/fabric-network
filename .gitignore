@@ -20,3 +20,7 @@ blockchain-explorer
 
 connection/
 chaincodes/
+
+# root ca storage
+ca/tls-ca/*
+ca/users/*

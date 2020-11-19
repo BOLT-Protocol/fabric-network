@@ -45,4 +45,17 @@ killall orderer
 4. `./bins/peer/approve_cc.sh -c {3.查詢到的結果} -C ${channal} -n {chaincode name} -s {Sequence} -v {chaincode version}` 節點 驗證  chaincode
 5. `./bins/peer/check_commit_cc.sh ~~~各種參數` 檢查可 commit 的 chaincode，如果是 ture 再往下
 6. `./bins/peer/commit_cc.sh  ~~~各種參數` commit chaicode
-7. `./bins/peer/query_committed_cc.sh  ~~~各種參數` 查詢 channel chaincode 資訊 
+7. `./bins/peer/query_committed_cc.sh  ~~~各種參數` 查詢 channel chaincode 資訊
+
+## CA
+設定 ca/.env
+$CSR_HOST 本地 IP/Domain
+
+***step1. 開啟 root CA***
+
+`docker-compose -f ca/docker-compose-tls-ca.yaml up -d`
+會在 ca/tls-ca 下產生 root ca 相關檔案
+
+***step2. Enroll admin***
+`./ca/enroll.sh` 裡面用到的 USER 和 PW 要和 step1 的 server 相同
+
