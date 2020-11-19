@@ -7,7 +7,7 @@ services:
   ca-tls:
     container_name: ca-tls
     image: hyperledger/fabric-ca:$IMAGE_TAG
-    command: sh -c 'fabric-ca-server start -d -b tls-ca-admin:tls-ca-adminpw --port 7054'
+    command: sh -c 'fabric-ca-server start -d -b admin:caserverpw --port 7054'
     environment:
       - FABRIC_CA_SERVER_HOME=/home/ubuntu/fabric/fabric-ca/crypto
       - FABRIC_CA_SERVER_TLS_ENABLED=true

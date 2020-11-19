@@ -56,6 +56,15 @@ $CSR_HOST 本地 IP/Domain
 `docker-compose -f ca/docker-compose-tls-ca.yaml up -d`
 會在 ca/tls-ca 下產生 root ca 相關檔案
 
-***step2. Enroll admin***
-`./ca/enroll.sh` 裡面用到的 USER 和 PW 要和 step1 的 server 相同
+***step2. Enroll Admin***
+`./ca/enroll.sh -u <USER> -p <PASSWORD>` 裡面用到的 USER 和 PW 要和 step1 的 server 相同
 
+
+`./ca/affiliation_add <aff name>` 創建組織
+***step3. Register***
+`./ca/register.sh -u <USER> -p <PASSWORD> -a <AFFILIATION>` 登入用戶(此時不會產生檔案，要step4後才會)
+
+***step4. Enroll User***
+`./ca/identity_list.sh` 查看哪些用戶可以 Enroll
+
+`./ca/enroll.sh -u <USER> -p <PASSWORD>` USER 為上方查到的 name
