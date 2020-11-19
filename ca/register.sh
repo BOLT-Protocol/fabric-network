@@ -23,4 +23,4 @@ export FABRIC_CA_CLIENT_TLS_CERTFILES=$PWD/ca/tls-ca/crypto/ca-cert.pem
 # TODO: caserver
 source $PWD/ca/setclient.sh caserver admin
 
-fabric-ca-client register -d --id.name $USER --id.secret $PW --id.affiliation $AFFILIATION --id.type client -u https://$SERVER_HOST
+fabric-ca-client register -d --id.name $USER --id.secret $PW --id.affiliation $AFFILIATION --id.type admin -u https://$SERVER_HOST

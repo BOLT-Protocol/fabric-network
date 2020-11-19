@@ -17,4 +17,4 @@ done
 export FABRIC_CA_CLIENT_TLS_CERTFILES=$PWD/ca/tls-ca/crypto/ca-cert.pem
 source $PWD/ca/setclient.sh caserver admin
 
-fabric-ca-client identity modify $USER --affiliation org1
+fabric-ca-client identity modify $USER --attrs 'hf.Revoker=true,admin=true:ecert'
