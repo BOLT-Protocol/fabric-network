@@ -33,7 +33,7 @@ Organizations:
   - &Bolt
     Name: Bolt
     ID: BoltMSP
-    MSPDir: ./ca/client/bolt/bolt-user/msp
+    MSPDir: ./ca/client/bolt/bolt-admin/msp
     Policies: &BoltPolicies
       Readers:
           Type: Signature
@@ -46,7 +46,7 @@ Organizations:
       Admins:
           Type: Signature
           # Either Org admin OR Orderer Admin can carry out admin activities
-          Rule: "OR('BoltMSP.admin','OrdererMSP.admin')"
+          Rule: "OR('BoltMSP.admin')"
       Endorsement:
           Type: Signature
           # Any member can act as an endorser
@@ -210,8 +210,8 @@ Channel: &ChannelDefaults
         Rule: "ANY Writers"
     Admins:
         Type: ImplicitMeta
-        # Rule: "MAJORITY Admins"
         Rule: "ANY Admins"
+
 
   Capabilities:
     <<: *ChannelCapabilities

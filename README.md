@@ -13,7 +13,8 @@
 或手動執行
 ***
 ***step1. 產生初始檔案***
-
+**使用 CA**
+或
 1. orderer, peer crypto 資料
 
     ```./gen-crypto.sh all```
@@ -53,18 +54,33 @@ $CSR_HOST 本地 IP/Domain
 
 ***step1. 開啟 root CA***
 
-`docker-compose -f ca/docker-compose-tls-ca.yaml up -d`
+`cd ca && docker-compose -f docker-compose-tls-ca.yaml up -d`
 會在 ca/tls-ca 下產生 root ca 相關檔案
 
 ***step2. Enroll Admin***
 `./ca/enroll.sh -u <USER> -p <PASSWORD>` 裡面用到的 USER 和 PW 要和 step1 的 server 相同
 
-
-`./ca/affiliation_add <aff name>` 創建組織
+`./ca/affiliation_add.sh <aff name>` 創建組織
 ***step3. Register***
 `./ca/register.sh -u <USER> -p <PASSWORD> -a <AFFILIATION>` 登入用戶(此時不會產生檔案，要step4後才會)
+
+```
+./ca.register.sh -u bolt-admin -p pw -a blot
+```
+
 
 ***step4. Enroll User***
 `./ca/identity_list.sh` 查看哪些用戶可以 Enroll
 
-`./ca/enroll.sh -u <USER> -p <PASSWORD>` USER 為上方查到的 name
+`./ca/enroll.sh -u <USER> -p <PASSWORD> -a <AFFILIATION>` USER 為上方查到的 name
+```
+./ca.enroll.sh -u bolt-admin -p pw -a blot
+```
+
+### 產生 orderer
+修改 configtx.yaml `MSPDir`
+修改 bins/orderer/launch.sh
+
+### 產生 Genesis/block
+### 產生 Channel tx
+./gen-genesis.channeltx.sh

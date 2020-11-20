@@ -33,5 +33,5 @@ fabric-ca-client enroll -d -u https://$USER:$PW@$SERVER_HOST
 if [ AFFILIATION != 'caserver' ];
 then
     echo  "Copy admincerts"
-    cp $PWD/ca/client/caserver/admin/msp/signcerts/*  $FABRIC_CA_CLIENT_HOME/msp/admincerts
+    cp -r $PWD/ca/client/caserver/admin/msp/signcerts/*  $FABRIC_CA_CLIENT_HOME/msp/admincerts
 fi
