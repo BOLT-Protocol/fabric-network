@@ -11,9 +11,9 @@ Capabilities:
 # ORGANIZATIONS
 Organizations:
   - &Orderer
-    Name: Orderer
+    Name: OrdererOrg
     ID: OrdererMSP
-    MSPDir: ./ca/client/orderer/orderer-admin/msp
+    MSPDir: ./crypto-config/ordererOrganizations/bolt.com/msp
     # Policies are mandatory starting 2.x
     Policies: &OrdererPolicies
       Readers:
@@ -31,9 +31,9 @@ Organizations:
           Rule: "OR('OrdererMSP.member')"
 
   - &Bolt
-    Name: Bolt
+    Name: BoltOrg
     ID: BoltMSP
-    MSPDir: ./ca/client/bolt/bolt-admin/msp
+    MSPDir: ./crypto-config/peerOrganizations/bolt.com/msp
     Policies: &BoltPolicies
       Readers:
           Type: Signature
@@ -52,7 +52,7 @@ Organizations:
           # Any member can act as an endorser
           Rule: "OR('BoltMSP.member')"
     AnchorPeers:
-      - Host: 10.110.203.155
+      - Host: devpeer.bolt.com
         Port: 7051
 
   
@@ -60,11 +60,28 @@ Organizations:
 #   ORDERER
 Orderer: &OrdererDefaults
 
-  OrdererType: solo
+  OrdererType: etcdraft
 
   Addresses:
-    - 10.110.203.155:7050
+    - orderer0.bolt.com:7050
+    - orderer1.bolt.com:7050
+    - orderer2.bolt.com:7050
   # Policies for Orderer
+  EtcdRaft:
+      Consenters:
+      - Host: orderer0.bolt.com:7050
+        Port: 7050
+        ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
+        ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
+      - Host: orderer1.bolt.com:7050
+        Port: 7050
+        ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
+        ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
+      - Host: orderer2.bolt.com:7050
+        Port: 7050
+        ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt
+        ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt
+
   Policies:
     Readers:
         Type: ImplicitMeta

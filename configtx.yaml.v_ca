@@ -1,6 +1,4 @@
 
-# Cloud Configtx
-
 #   CAPABILITIES
 Capabilities:
   Application: &ApplicationCapabilities
@@ -15,7 +13,7 @@ Organizations:
   - &Orderer
     Name: Orderer
     ID: OrdererMSP
-    MSPDir: ./temp/orgs-msp/orderer/msp
+    MSPDir: ./ca/client/orderer/orderer-admin/msp
     # Policies are mandatory starting 2.x
     Policies: &OrdererPolicies
       Readers:
@@ -32,30 +30,29 @@ Organizations:
           Type: Signature
           Rule: "OR('OrdererMSP.member')"
 
-  - &Default
-    Name: Default
-    ID: DefaultMSP
-    MSPDir: ./temp/orgs-msp/default/msp
-    Policies: &DefaultPolicies
+  - &Bolt
+    Name: Bolt
+    ID: BoltMSP
+    MSPDir: ./ca/client/bolt/bolt-admin/msp
+    Policies: &BoltPolicies
       Readers:
           Type: Signature
           # Any member can READ e.g., query
-          Rule: "OR('DefaultMSP.member')"
+          Rule: "OR('BoltMSP.member')"
       Writers:
           Type: Signature
           # Any member can WRITE e.g., submit transaction
-          Rule: "OR('DefaultMSP.member')"
+          Rule: "OR('BoltMSP.member')"
       Admins:
           Type: Signature
-          # Either Default admin OR Orderer Admin can carry out admin activities
-          Rule: "OR('DefaultMSP.admin')"
+          # Either Org admin OR Orderer Admin can carry out admin activities
+          Rule: "OR('BoltMSP.admin')"
       Endorsement:
           Type: Signature
           # Any member can act as an endorser
-          Rule: "OR('DefaultMSP.member')"
+          Rule: "OR('BoltMSP.member')"
     AnchorPeers:
-      # Not sure should UPDATE THE IP ADDRESS?
-      - Host: peer.default.com
+      - Host: 10.110.203.38
         Port: 7051
 
   
@@ -64,19 +61,10 @@ Organizations:
 Orderer: &OrdererDefaults
 
   OrdererType: solo
-  # should use etcdraft
 
   Addresses:
-    # UPDATE THE IP ADDRESS
-    -  10.110.203.155:7050
-
-  # EtcdRaft:
-  #     Consenters:
-      # - Host: orderer.default.com
-      #   Port: 7050
-      #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-      #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-# Policies for Orderer
+    - 10.110.203.38:7050
+  # Policies for Orderer
   Policies:
     Readers:
         Type: ImplicitMeta
@@ -124,13 +112,11 @@ Application: &ApplicationDefaults
 
     # ACL Policy for lscc's "getchaincodes" function
     lscc/GetInstantiatedChaincodes: /Channel/Application/Readers
-    
 
     #---Query System Chaincode (qscc) function to policy mapping for access control---#
 
     # ACL policy for qscc's "GetChainInfo" function
     qscc/GetChainInfo: /Channel/Application/Readers
-    
 
     # ACL policy for qscc's "GetBlockByNumber" function
     qscc/GetBlockByNumber: /Channel/Application/Readers
@@ -180,8 +166,9 @@ Application: &ApplicationDefaults
 
     # ACL policy for _lifecycle's "QueryChaincodeDefinition" function
     _lifecycle/QueryChaincodeDefinition: /Channel/Application/Readers
-    
 
+    # ACL policy for _lifecycle's "QueryChaincodeDefinitions" function
+    _lifecycle/QueryChaincodeDefinitions: /Channel/Application/Readers
 
   # Default policies
   Policies: &ApplicationDefaultPolicies
@@ -189,6 +176,7 @@ Application: &ApplicationDefaults
     # --channel-config-policy
     Endorsement:
         Type: ImplicitMeta
+        # Rule: "MAJORITY Endorsement"
         Rule: "ANY Endorsement"
     Readers:
         Type: ImplicitMeta
@@ -204,7 +192,6 @@ Application: &ApplicationDefaults
     LifecycleEndorsement:
         Type: ImplicitMeta
         Rule: "ANY Endorsement"
-
 
   Organizations:
 
@@ -225,6 +212,7 @@ Channel: &ChannelDefaults
         Type: ImplicitMeta
         Rule: "ANY Admins"
 
+
   Capabilities:
     <<: *ChannelCapabilities
 
@@ -232,32 +220,32 @@ Channel: &ChannelDefaults
 #   PROFILES
 Profiles:
 
-  DefaultOrdererGenesis:
+  BoltOrdererGenesis:
       <<: *ChannelDefaults
       Orderer:
           <<: *OrdererDefaults
           Organizations:
               - <<: *Orderer
       Consortiums:
-        DefaultConsortium:
+        BoltConsortium:
             Organizations:
-                  - <<: *Default
-
+                  - <<: *Bolt
+                  
       Application:
             <<: *ApplicationDefaults
 
             Organizations:
-                - <<: *Default
-  DefaultChannel:
+                - <<: *Bolt                        
+  BoltChannel:
     <<: *ChannelDefaults
-    Consortium: DefaultConsortium
+    Consortium: BoltConsortium
         
     Application:
         <<: *ApplicationDefaults
         
         Organizations:
-            - <<: *Default
-
+            - <<: *Bolt
+            
         
 
 

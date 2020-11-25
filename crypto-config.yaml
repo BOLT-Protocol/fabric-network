@@ -3,18 +3,38 @@
 
 OrdererOrgs:
   - Name: Orderer
-    Domain: default.com
+    Domain: bolt.com
     #EnableNodeOUs: true
+    # CA:
+    #   Country: US
+    #   Province: California
+    #   Locality: San Francisco
     Specs:
-      - Hostname: orderer
+      - Hostname: orderer0
+      - Hostname: orderer1
+      - Hostname: orderer2
       
 PeerOrgs:
-  - Name: Default
-    Domain: default.com
+  - Name: Org1
+    Domain: bolt.com
     #EnableNodeOUs: true
+    # CA:
+    #   Country: US
+    #   Province: California
+    #   Locality: San Francisco
     Specs:
-      - Hostname: default
+      - Hostname: devpeer
         CommonName: devpeer
+    Users:
+      Count: 2
+
+  - Name: Org1
+    Domain: org1.example.com
+    #EnableNodeOUs: true
+    # CA:
+    #   Country: US
+    #   Province: California
+    #   Locality: San Francisco
     Users:
       Count: 1
 
