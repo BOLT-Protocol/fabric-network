@@ -31,7 +31,7 @@ Organizations:
           Rule: "OR('OrdererMSP.member')"
 
   - &Bolt
-    Name: BoltOrg
+    Name: Bolt
     ID: BoltMSP
     MSPDir: ./crypto-config/peerOrganizations/bolt.com/msp
     Policies: &BoltPolicies
@@ -64,20 +64,20 @@ Orderer: &OrdererDefaults
 
   Addresses:
     - orderer0.bolt.com:7050
-    - orderer1.bolt.com:7050
-    - orderer2.bolt.com:7050
+    # - orderer1.bolt.com:7050
+    # - orderer2.bolt.com:7050
   # Policies for Orderer
   EtcdRaft:
       Consenters:
-      - Host: orderer0.bolt.com:7050
+      - Host: orderer0.bolt.com
         Port: 7050
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
-      - Host: orderer1.bolt.com:7050
+      - Host: orderer1.bolt.com
         Port: 7050
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
-      - Host: orderer2.bolt.com:7050
+      - Host: orderer2.bolt.com
         Port: 7050
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt

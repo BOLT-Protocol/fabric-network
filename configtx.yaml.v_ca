@@ -52,7 +52,7 @@ Organizations:
           # Any member can act as an endorser
           Rule: "OR('BoltMSP.member')"
     AnchorPeers:
-      - Host: 10.110.203.38
+      - Host: 10.110.200.53
         Port: 7051
 
   
@@ -63,7 +63,7 @@ Orderer: &OrdererDefaults
   OrdererType: solo
 
   Addresses:
-    - 10.110.203.38:7050
+    - 10.110.200.53:7050
   # Policies for Orderer
   Policies:
     Readers:

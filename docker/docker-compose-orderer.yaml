@@ -1,11 +1,11 @@
 version: '2'
 
 services:
-  ORDERER_NAME:
+  ORDERER_NAME1:
     container_name: $ORDERER_NAME
     image: hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
-      - FABRIC_LOGGING_SPEC=INFO
+      - FABRIC_LOGGING_SPEC=DEBUG
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
       - ORDERER_GENERAL_LISTENPORT=$PORT
       - ORDERER_GENERAL_GENESISMETHOD=file
@@ -32,5 +32,5 @@ services:
     ports:
       - $PORT:7050
     extra_hosts:
-      - "devpeer.bolt.com:10.110.203.38"
-      - "orderer0.bolt.com:10.110.203.38"
+      - "devpeer.bolt.com:10.110.200.53"
+      - "orderer0.bolt.com:10.110.200.53"
