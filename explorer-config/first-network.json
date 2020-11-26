@@ -8,7 +8,7 @@
 			"password": "exploreradminpw"
 		},
 		"enableAuthentication": true,
-		"organization": "DefaultMSP",
+		"organization": "Bolt",
 		"connection": {
 			"timeout": {
 				"peer": {
@@ -19,9 +19,9 @@
 		}
 	},
 	"channels": {
-		"defaultchannel": {
+		"boltchannel": {
 			"peers": {
-				"default.com": {}
+				"devpeer.bolt.com": {}
 			},
 			"connection": {
 				"timeout": {
@@ -35,23 +35,23 @@
 		}
 	},
 	"organizations": {
-		"DefaultMSP": {
-			"mspid": "DefaultMSP",
+		"Bolt": {
+			"mspid": "BoltMSP",
 			"adminPrivateKey": {
-				"path": "/tmp/crypto/peerOrganizations/default.com/users/Admin@default.com/msp/keystore/priv_sk"
+				"path": "/tmp/crypto/peerOrganizations/bolt.com/users/Admin@bolt.com/msp/keystore/priv_sk"
 			},
-			"peers": ["default.com"],
+			"peers": ["devpeer.bolt.com"],
 			"signedCert": {
-				"path": "/tmp/crypto/peerOrganizations/default.com/users/Admin@default.com/msp/signcerts/Admin@default.com-cert.pem"
+				"path": "/tmp/crypto/peerOrganizations/bolt.com/users/Admin@bolt.com/msp/signcerts/Admin@bolt.com-cert.pem"
 			}
 		}
 	},
 	"peers": {
-		"default.com": {
+		"devpeer.bolt.com": {
 			"tlsCACerts": {
-				"path": "/tmp/crypto/peerOrganizations/default.com/peers/devpeer/tls/ca.crt"
+				"path": "/tmp/crypto/peerOrganizations/bolt.com/peers/devpeer.bolt.com/tls/ca.crt"
 			},
-			"url": "grpcs://10.110.200.53:7051"
+			"url": "grpcs://devpeer.bolt.com:7051"
 		}
 	}
 }

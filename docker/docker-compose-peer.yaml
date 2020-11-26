@@ -7,7 +7,7 @@ version: '2'
 
 networks:
   fabric:
-
+    name: fabric
 services:
   peer:
     container_name: $PEER_NAME
@@ -31,16 +31,23 @@ services:
       - CORE_PEER_ID=$PEER_NAME
       - CORE_PEER_ADDRESS=$PEER_NAME:$PORT
       - CORE_PEER_LISTENADDRESS=0.0.0.0:$PORT
-      - CORE_PEER_CHAINCODEADDRESS=$PEER_NAME:$CHAICODE_PORT
-      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:$CHAICODE_PORT
+      - CORE_PEER_CHAINCODEADDRESS=$PEER_NAME:$CHAINCODE_PORT
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:$CHAINCODE_PORT
       - CORE_PEER_GOSSIP_BOOTSTRAP=$PEER_NAME:$PORT
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=$PEER_NAME:$PORT
       - CORE_PEER_LOCALMSPID=$ORGMSP
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/users/Admin@bolt.com/msp
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/users/Admin@$DOMAIN/msp
+      # - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      # - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=$PEER_NAME.couchdb:$DB_PORT
+      # # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # # match the username and password set for the associated CouchDB.
+      # - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin
+      # - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
     volumes:
         - $MSP_PATH/msp:/etc/hyperledger/fabric/msp
         - $MSP_PATH/tls:/etc/hyperledger/fabric/tls
-        - $MSP_PATH/../../users/Admin@bolt.com/msp:/etc/hyperledger/fabric/users/Admin@bolt.com/msp
+        - $MSP_PATH/../../users/Admin@$DOMAIN/msp:/etc/hyperledger/fabric/users/Admin@$DOMAIN/msp
         - ../artefacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/artefacts
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
@@ -48,7 +55,22 @@ services:
       - $PORT:7051
     networks:
       - fabric
-    extra_hosts:
-      - "devpeer.bolt.com:10.110.200.53"
-      - "orderer0.bolt.com:10.110.200.53"
+    # depends_on:
+    #   - couchdb
 
+
+  # couchdb:
+  #   container_name: $PEER_NAME.couchdb
+  #   hostname: $PEER_NAME.couchdb
+  #   image: couchdb:3.1.1
+  #   # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+  #   # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+  #   environment:
+  #     - COUCHDB_USER=admin
+  #     - COUCHDB_PASSWORD=adminpw
+  #   # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+  #   # for example map it to utilize Fauxton User Interface in dev environments.
+  #   ports:
+  #     - $DB_PORT:5984
+  #   networks:
+  #     - fabric

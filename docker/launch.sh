@@ -4,7 +4,7 @@
 # ORGMSP
 # NAME
 
-while getopts ':t:O:M:p:n:' o; do
+while getopts ':t:O:M:p:n:d:' o; do
     case $"${o}" in
         t)
             TYPE=$OPTARG
@@ -20,6 +20,9 @@ while getopts ':t:O:M:p:n:' o; do
             ;;
         n)
             NAME=$OPTARG
+            ;;
+        d)
+            DB_PORT=$OPTARG
             ;;
         *)
             # usage
@@ -38,11 +41,12 @@ function setOrderer () {
     cp ./docker-compose-orderer.yaml docker-compose-orderer.yaml
     sed -i '' "s/ORDERER_NAME=/ORDERER_NAME=$NAME/g" $C_PATH/.env
     sed -i '' "s/ORGMSP=/ORGMSP=$ORGMSP/g" $C_PATH/.env
-    sed -i '' "s/PORT=/PORT=$PORT/g" $C_PATH/.env
+    sed -i '' "s/PORT={PORT}/PORT=$PORT/g" $C_PATH/.env
+    sed -i '' "s/DOMAIN=/DOMAIN=$NAME.$ORG/g" $C_PATH/.env
     sed -i '' "s/COMPOSE_PROJECT_NAME=/COMPOSE_PROJECT_NAME=$NAME.$ORG/g" $C_PATH/.env
     sed -i '' "s#MSP_PATH=#MSP_PATH=$C_PATH#g" $C_PATH/.env
 
-    docker-compose -f docker-compose-orderer.yaml --env-file $C_PATH/.env up
+    docker-compose -f docker-compose-orderer.yaml --env-file $C_PATH/.env up -d
 }
 
 function setPeer () {
@@ -52,11 +56,13 @@ function setPeer () {
 
     sed -i '' "s/PEER_NAME=/PEER_NAME=$NAME.$ORG/g" $C_PATH/.env
     sed -i '' "s/ORGMSP=/ORGMSP=$ORGMSP/g" $C_PATH/.env
-    sed -i '' "s/PORT=/PORT=$PORT/g" $C_PATH/.env
-    sed -i '' "s/CHAINCODE_PORT=/CHAINCODE_PORT=$((PORT+1))/g" $C_PATH/.env
+    sed -i '' "s/PORT={PORT}/PORT=$PORT/g" $C_PATH/.env
+    sed -i '' "s/CHAINCODE_PORT={CC_PORT}/CHAINCODE_PORT=$((PORT+1))/g" $C_PATH/.env
+    sed -i '' "s/DB_PORT={DB_PORT}/DB_PORT=$DB_PORT/g" $C_PATH/.env
     sed -i '' "s/DOMAIN=/DOMAIN=$ORG/g" $C_PATH/.env
+    sed -i '' "s/COMPOSE_PROJECT_NAME=/COMPOSE_PROJECT_NAME=$NAME.$ORG/g" $C_PATH/.env
     sed -i '' "s#MSP_PATH=#MSP_PATH=$C_PATH#g" $C_PATH/.env
-    docker-compose -f docker-compose-peer.yaml --env-file $C_PATH/.env up
+    docker-compose -f docker-compose-peer.yaml --env-file $C_PATH/.env up -d
 } 
 
 if [ "$TYPE" = "orderer" ]

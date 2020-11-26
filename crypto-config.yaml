@@ -31,8 +31,13 @@ PeerOrgs:
       Count: 2
 
   - Name: Org1
-    Domain: org1.example.com
+    Domain: example.com
     EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+      Hostname: org1
     # CA:
     #   Country: US
     #   Province: California

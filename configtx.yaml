@@ -11,7 +11,7 @@ Capabilities:
 # ORGANIZATIONS
 Organizations:
   - &Orderer
-    Name: OrdererOrg
+    Name: Orderer
     ID: OrdererMSP
     MSPDir: ./crypto-config/ordererOrganizations/bolt.com/msp
     # Policies are mandatory starting 2.x
@@ -64,8 +64,8 @@ Orderer: &OrdererDefaults
 
   Addresses:
     - orderer0.bolt.com:7050
-    # - orderer1.bolt.com:7050
-    # - orderer2.bolt.com:7050
+    - orderer1.bolt.com:8050
+    - orderer2.bolt.com:9050
   # Policies for Orderer
   EtcdRaft:
       Consenters:
@@ -74,11 +74,11 @@ Orderer: &OrdererDefaults
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer0.bolt.com/tls/server.crt
       - Host: orderer1.bolt.com
-        Port: 7050
+        Port: 8050
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer1.bolt.com/tls/server.crt
       - Host: orderer2.bolt.com
-        Port: 7050
+        Port: 9050
         ClientTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt
         ServerTLSCert: ./crypto-config/ordererOrganizations/bolt.com/orderers/orderer2.bolt.com/tls/server.crt
 

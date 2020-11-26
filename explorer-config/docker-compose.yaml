@@ -8,8 +8,8 @@ volumes:
 
 networks:
   mynetwork.com:
-    # external:
-    #   name: net_test
+    external:
+      name: fabric
 
 services:
 

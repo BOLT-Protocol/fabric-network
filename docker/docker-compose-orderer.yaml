@@ -1,8 +1,13 @@
 version: '2'
 
+networks:
+  fabric:
+    name: fabric
+
 services:
   ORDERER_NAME1:
-    container_name: $ORDERER_NAME
+    container_name: $DOMAIN
+    hostname: $DOMAIN
     image: hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - FABRIC_LOGGING_SPEC=DEBUG
@@ -31,6 +36,5 @@ services:
         # - orderer.example.com:/var/hyperledger/production/orderer
     ports:
       - $PORT:7050
-    extra_hosts:
-      - "devpeer.bolt.com:10.110.200.53"
-      - "orderer0.bolt.com:10.110.200.53"
+    networks:
+      - fabric
