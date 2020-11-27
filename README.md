@@ -1,21 +1,20 @@
 ## Get Started
 
 產生 block, channel
-sh ./gen-test.sh
+`sh ./gen-test.sh`
 
 開 orderer
-sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 7050 -n orderer0 -t orderer
-sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 8050 -n orderer1 -t orderer
-sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 9050 -n orderer2 -t orderer
+`sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 7050 -n orderer0 -t orderer`
+`sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 8050 -n orderer1 -t orderer`
+`sh ./docker/launch.sh -O bolt.com -M OrdererMSP -p 9050 -n orderer2 -t orderer`
 
 開 peer
-sh ./docker/launch.sh -O bolt.com -M BoltMSP -p 7051 -n devpeer -t peer -d 5000
-sh ./docker/launch.sh -O example.com -M Org1MSP -p 8051 -n org1 -t peer -d 6000
+`sh ./docker/launch.sh -O bolt.com -M BoltMSP -p 7051 -n devpeer -t peer -d 5000`
+`sh ./docker/launch.sh -O example.com -M Org1MSP -p 8051 -n org1 -t peer -d 6000`
 
-
-
-
-
+<br>
+---
+<br>
 
 > TODO: 以下檔案 IP 位置要改 
 
