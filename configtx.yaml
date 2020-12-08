@@ -57,6 +57,31 @@ Organizations:
       - Host: peer.default.com
         Port: 7051
 
+  - &Asus
+      Name: Asus
+      ID: AsusMSP
+      MSPDir: ./temp/orgs-msp/asus/msp
+      Policies: &AsusPolicies
+        Readers:
+            Type: Signature
+            # Any member can READ e.g., query
+            Rule: "OR('AsusMSP.member')"
+        Writers:
+            Type: Signature
+            # Any member can WRITE e.g., submit transaction
+            Rule: "OR('AsusMSP.member')"
+        Admins:
+            Type: Signature
+            # Either Asus admin OR Orderer Admin can carry out admin activities
+            Rule: "OR('AsusMSP.admin')"
+        Endorsement:
+            Type: Signature
+            # Any member can act as an endorser
+            Rule: "OR('AsusMSP.member')"
+      AnchorPeers:
+        - Host: peer.asus.com
+          Port: 7051
+
   
 
 #   ORDERER
@@ -240,13 +265,14 @@ Profiles:
       Consortiums:
         DefaultConsortium:
             Organizations:
-                  - <<: *Default
-
+                  - *Default
+                  - *Asus
       Application:
             <<: *ApplicationDefaults
 
             Organizations:
-                - <<: *Default
+                - *Default
+                - *Asus
   DefaultChannel:
     <<: *ChannelDefaults
     Consortium: DefaultConsortium
@@ -255,7 +281,8 @@ Profiles:
         <<: *ApplicationDefaults
         
         Organizations:
-            - <<: *Default
+            - *Default
+            - *Asus
 
         
 
