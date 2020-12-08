@@ -10,6 +10,7 @@ while getopts ':f:l:' o; do
             ;;
         l)
             CC_LABEL=$OPTARG
+            CC_PACKAGE_FILE=$HOME/$CC_LABEL.tar.gz
             ;;
         *)
             # usage

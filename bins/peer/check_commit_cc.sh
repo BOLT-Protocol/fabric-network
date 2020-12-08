@@ -27,4 +27,4 @@ done
 
 source $PWD/bins/peer/set-env.sh
 
-peer lifecycle chaincode checkcommitreadiness -n $NAME -C $CHANNEL --sequence $SEQUENCE --init-required -v $VERSION
+peer lifecycle chaincode checkcommitreadiness -n $NAME -C $CHANNEL --sequence $SEQUENCE -v $VERSION

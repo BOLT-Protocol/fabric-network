@@ -25,7 +25,7 @@
 1. ./bins/orderer/launch.sh &
 2. ./bins/peer/launch.sh &
 
-
+初始 peer 加入 channel
 ./bins/peer/join-channel.sh
 
 killall peer
@@ -42,7 +42,7 @@ killall orderer
 1. `./bins/peer/package_cc.sh` 打包檔案至設定位置
 2. `./bins/peer/install_cc.sh` 安裝 chaincode 
 3. `./bins/peer/query_installed_cc.sh` 查詢已安裝 chaincide
-4. `./bins/peer/approve_cc.sh -c {3.查詢到的結果} -C ${channal} -s {Sequence} -v {chaincode version}` 節點 驗證  chaincode
-5. `./bins/peer/check_committed_cc.sh ~~~各種參數` 檢查可 commit 的 chaincode
+4. `./bins/peer/approve_cc.sh -c {3.查詢到的結果} -C ${channal} -n {chaincode name} -s {Sequence} -v {chaincode version}` 節點 驗證  chaincode
+5. `./bins/peer/check_commit_cc.sh ~~~各種參數` 檢查可 commit 的 chaincode，如果是 ture 再往下
 6. `./bins/peer/commit_cc.sh  ~~~各種參數` commit chaicode
 7. `./bins/peer/query_committed_cc.sh  ~~~各種參數` 查詢 channel chaincode 資訊 

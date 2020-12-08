@@ -17,3 +17,6 @@ ca/server/*
 ca/client/*
 
 blockchain-explorer
+
+connection/
+chaincodes/

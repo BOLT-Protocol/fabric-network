@@ -54,6 +54,7 @@ Organizations:
           # Any member can act as an endorser
           Rule: "OR('DefaultMSP.member')"
     AnchorPeers:
+      # Not sure should UPDATE THE IP ADDRESS?
       - Host: peer.default.com
         Port: 7051
 
