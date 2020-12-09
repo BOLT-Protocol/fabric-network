@@ -108,7 +108,8 @@ function createDefaultOrg() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/default.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp/config.yaml
-
+  mv ${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp/signcerts/cert.pem ${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp/signcerts/Admin@default.com-cert.pem
+  mv ${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp/keystore/* ${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp/keystore/priv_sk
 }
 
 function createAsusOrg() {
@@ -261,7 +262,8 @@ function createAsusOrg() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/asus.com/users/Admin@asus.com/msp/config.yaml
-
+  mv ${PWD}/crypto-config/peerOrganizations/asus.com/users/Admin@asus.com/msp/signcerts/cert.pem ${PWD}/crypto-config/peerOrganizations/asus.com/users/Admin@default.com/msp/signcerts/Admin@asus.com-cert.pem
+  mv ${PWD}/crypto-config/peerOrganizations/asus.com/users/Admin@asus.com/msp/keystore/* ${PWD}/crypto-config/peerOrganizations/asus.com/users/Admin@asus.com/msp/keystore/priv_sk
 }
 
 function createOrderer() {
