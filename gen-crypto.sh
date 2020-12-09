@@ -9,7 +9,8 @@ if [ ! -z $1 ]; then
     if [ $1 == "all" ]; then
         #1. Generate the crypto
         echo "====> Generating the crypto-config"
-        rm -rf crypto-config
+        rm -rf crypto-config/peerOrganizations
+        rm -rf crypto-config/ordererOrganizations
         cryptogen generate --config=./crypto-config.yaml
     fi
 else
