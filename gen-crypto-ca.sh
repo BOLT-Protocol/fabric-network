@@ -19,7 +19,7 @@ function createOrgs() {
 
     while :
         do
-            if [ ! -f "crypto-config/fabric-ca/org1/tls-cert.pem" ]; then
+            if [ ! -f "crypto-config/fabric-ca/defaultOrg/tls-cert.pem" ]; then
                 sleep 1
             else
                 break
@@ -48,7 +48,7 @@ if [ ! -z $1 ]; then
     if [ $1 == "up" ]; then
         ##1. Generate the crypto
         echo "====> Generating the crypto-config"
-        # rm -rf crypto-config/ordererOrganizations && rm -rf crypto-crypto/peerOrganizations
+        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-crypto/peerOrganizations
         createOrgs
     fi
     if [ $1 == "down" ]; then
@@ -57,11 +57,13 @@ if [ ! -z $1 ]; then
         mkdir -p ./crypto-config/tmp/fabric-ca/asusOrg
         mkdir -p ./crypto-config/tmp/fabric-ca/defaultOrg
         mkdir -p ./crypto-config/tmp/fabric-ca/ordererOrg
+        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-config/peerOrganizations
         cp ./crypto-config/fabric-ca/registerEnroll.sh ./crypto-config/tmp/fabric-ca/registerEnroll.sh
         cp ./crypto-config/fabric-ca/asusOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/asusOrg/fabric-ca-server-config.yaml
         cp ./crypto-config/fabric-ca/defaultOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/defaultOrg/fabric-ca-server-config.yaml
         cp ./crypto-config/fabric-ca/ordererOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/ordererOrg/fabric-ca-server-config.yaml
         rm -Rf ./crypto-config/fabric-ca/
+        mv -f ./crypto-config/tmp/fabric-ca/ ./crypto-config/
     fi
 else
     echo 'Use ./gen-crypto.sh   up      to regenerate the crypto'
