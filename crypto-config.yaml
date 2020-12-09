@@ -16,7 +16,14 @@ PeerOrgs:
       - Hostname: default
         CommonName: devpeer
     Users:
-      Count: 1
+      Count: 2
+  - Name: Asus
+    Domain: asus.com
+    Template:
+      Count: 3
+    Users:
+      Count: 2
+
 
 
       

@@ -9,7 +9,8 @@ if [ ! -z $1 ]; then
     if [ $1 == "all" ]; then
         #1. Generate the crypto
         echo "====> Generating the crypto-config"
-        rm -rf crypto-config
+        rm -rf crypto-config/peerOrganizations
+        rm -rf crypto-config/ordererOrganizations
         cryptogen generate --config=./crypto-config.yaml
     fi
 else
@@ -23,6 +24,8 @@ mkdir -p ./temp/orgs-msp/orderer
 cp -R crypto-config/ordererOrganizations/default.com/msp    temp/orgs-msp/orderer/msp
 mkdir -p temp/orgs-msp/default
 cp -R crypto-config/peerOrganizations/default.com/msp    temp/orgs-msp/default/msp
+mkdir -p temp/orgs-msp/asus
+cp -R crypto-config/peerOrganizations/asus.com/msp    temp/orgs-msp/asus/msp
 # Create the orgs-msp tar file
 cd temp
 tar -cf ../artefacts/orgs-msp.tar orgs-msp
@@ -45,6 +48,21 @@ cp -R crypto-config/peerOrganizations/default.com/users/User1@default.com/msp   
 cd temp
 tar -cf ../artefacts/default-msp.tar msps
 cd ../
+
+#4 Generate the asus-msp.tar
+echo   "====> Generating : default MSP : default-msp.tar"
+mkdir -p temp/msps
+cp -R crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/msp              temp/msps/peer
+cp -R crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/msp              temp/msps/peer
+cp -R crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/msp              temp/msps/peer
+cp -R crypto-config/peerOrganizations/asus.com/users/Admin@asus.com/msp              temp/msps/admin
+cp -R crypto-config/peerOrganizations/asus.com/users/User1@asus.com/msp              temp/msps/user1
+cp -R crypto-config/peerOrganizations/asus.com/users/User2@asus.com/msp              temp/msps/user2
+cd temp
+tar -cf ../artefacts/default-msp.tar msps
+cd ../
+
+
 rm -rf temp/msps/**
 
 

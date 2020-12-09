@@ -2,7 +2,8 @@
 
 # Ctypto materail
 temp
-crypto-config
+crypto-config/peerOrganizations
+crypto-config/ordererOrganizations
 artefacts/*
 
 # Fabcar example
