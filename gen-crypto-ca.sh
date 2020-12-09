@@ -43,35 +43,8 @@ function createOrgs() {
     # ./crypto-config/ccp-generate.sh
 
 }
-#1 Check if up was passed
-if [ ! -z $1 ]; then
-    if [ $1 == "up" ]; then
-        ##1. Generate the crypto
-        echo "====> Generating the crypto-config"
-        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-crypto/peerOrganizations
-        createOrgs
-        buidFiles
-    fi
-    if [ $1 == "down" ]; then
-        infoln "====> docker kill && remove ca"
-        IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA down --remove-orphans 2>&1
-        mkdir -p ./crypto-config/tmp/fabric-ca/asusOrg
-        mkdir -p ./crypto-config/tmp/fabric-ca/defaultOrg
-        mkdir -p ./crypto-config/tmp/fabric-ca/ordererOrg
-        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-config/peerOrganizations
-        cp ./crypto-config/fabric-ca/registerEnroll.sh ./crypto-config/tmp/fabric-ca/registerEnroll.sh
-        cp ./crypto-config/fabric-ca/asusOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/asusOrg/fabric-ca-server-config.yaml
-        cp ./crypto-config/fabric-ca/defaultOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/defaultOrg/fabric-ca-server-config.yaml
-        cp ./crypto-config/fabric-ca/ordererOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/ordererOrg/fabric-ca-server-config.yaml
-        rm -Rf ./crypto-config/fabric-ca/
-        rm -f ./artefacts/*
-        mv -f ./crypto-config/tmp/fabric-ca/ ./crypto-config/
-    fi
-else
-    echo 'Use ./gen-crypto.sh   up      to regenerate the crypto'
-fi
 
-function buidFiles() {
+function buildFiles() {
     echo    "====> Generating : Organization MSPs : orgs-msp.tar"
     #2 Generate the orgs-msp.tar
     rm -rf temp/orgs-msp
@@ -120,6 +93,36 @@ function buidFiles() {
 
     # rm -rf temp/msps/**
 }
+#1 Check if up was passed
+if [ ! -z $1 ]; then
+    if [ $1 == "up" ]; then
+        ##1. Generate the crypto
+        echo "====> Generating the crypto-config"
+        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-crypto/peerOrganizations
+        createOrgs
+        buildFiles
+    fi
+    if [ $1 == "down" ]; then
+        infoln "====> docker kill && remove ca"
+        IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA down --remove-orphans 2>&1
+        mkdir -p ./crypto-config/tmp/fabric-ca/asusOrg
+        mkdir -p ./crypto-config/tmp/fabric-ca/defaultOrg
+        mkdir -p ./crypto-config/tmp/fabric-ca/ordererOrg
+        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-config/peerOrganizations
+        cp ./crypto-config/fabric-ca/registerEnroll.sh ./crypto-config/tmp/fabric-ca/registerEnroll.sh
+        cp ./crypto-config/fabric-ca/asusOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/asusOrg/fabric-ca-server-config.yaml
+        cp ./crypto-config/fabric-ca/defaultOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/defaultOrg/fabric-ca-server-config.yaml
+        cp ./crypto-config/fabric-ca/ordererOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/ordererOrg/fabric-ca-server-config.yaml
+        rm -Rf ./crypto-config/fabric-ca/
+        rm -f ./artefacts/*
+        mv -f ./crypto-config/tmp/fabric-ca/ ./crypto-config/
+        rm -Rf ./crypto-config/tmp/
+    fi
+else
+    echo 'Use ./gen-crypto.sh   up      to regenerate the crypto'
+fi
+
+
 
 
 
