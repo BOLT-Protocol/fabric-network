@@ -72,7 +72,7 @@ General:
 
     # TLS: TLS settings for the GRPC server.
     TLS:
-        Enabled: false
+        Enabled: true
         PrivateKey: ./server.key
         Certificate: ./server.crt
         RootCAs:

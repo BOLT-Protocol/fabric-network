@@ -9,3 +9,13 @@ export CORE_PEER_LOCALMSPID=DefaultMSP
 export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp
 
 export FABRIC_CFG_PATH=${PWD}/bins/peer
+
+export CORE_PEER_TLS_CERT_FILE=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.crt
+
+export CORE_PEER_TLS_KEY_FILE=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.key
+
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/ca.crt
+
+# not sure
+export CORE_CLIENT_TLS_ROOTCAS=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/ca.crt
+
