@@ -1,11 +1,20 @@
 ## Get Started
 
-> TODO: 以下檔案 IP Address 要改 
+1. 安裝 fabric curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.0 1.4.9 
 
-- `configtx.yaml` => Orderer Address
-- `first-network.json` => Peer Address
-- `bins/peer/set-env.sh`  => Orderer Address
+2. 加入全域變數  export PATH=<path to download location>/bin:$PATH
+    
+3. clone https://github.com/BOLT-Protocol/fabric-network
 
+4. cd fabric-network
+
+5. 修改 ip 位置：
+  configtx.yaml(58, 71行) => Orderer Address
+  first-network.json(54行)  => Peer Address
+  bins/peer/set-env.sh(2行) => Orderer Address
+  bins/peer/core.yaml(27行取消註解 33行取消註解 改ip 39行改 ip)
+
+6. mkdir artefacts
 
 ### 啟動初始 Peer 與 Orderer 並建立資料
 
