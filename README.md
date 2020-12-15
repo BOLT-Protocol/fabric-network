@@ -1,10 +1,11 @@
 ## Get Started
 
-> TODO: 以下檔案 IP 位置要改 
+> TODO: 以下檔案 IP Address 要改 
 
-- `configtx.yaml`
-- `first-network.json`
-- `bins/peer/set-env.sh`
+- `configtx.yaml` => Orderer Address
+- `first-network.json` => Peer Address
+- `bins/peer/set-env.sh`  => Orderer Address
+
 
 ### 啟動初始 Peer 與 Orderer 並建立資料
 
@@ -15,8 +16,12 @@
 ***step1. 產生初始檔案***
 
 1. orderer, peer crypto 資料
-
+    1.1
     ```./gen-crypto.sh all```
+    
+    1.2 with ca
+    ```./gen-crypto-ca.sh up```
+    
 2.  產生 genesis.block, 初始 channel
 
     ```./gen-genesis-channeltx.sh```
