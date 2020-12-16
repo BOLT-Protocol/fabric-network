@@ -28,15 +28,15 @@ function createOrgs() {
 
         infoln "Create DefaultOrg Identities"
 
-        createDefaultOrg
+        createDefaultOrg $2
 
         infoln "Create AsusOrg Identities"
 
-        createAsusOrg
+        createAsusOrg $3
 
         infoln "Create OrdererOrg Identities"
 
-        createOrderer
+        createOrderer $4
 
     # infoln "Generate CCP files for Org1 and Org2"
 
