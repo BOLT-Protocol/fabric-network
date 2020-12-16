@@ -9,10 +9,11 @@
 4. cd fabric-network
 
 5. 修改 ip 位置：
-  configtx.yaml(58, 71行) => Orderer Address
-  first-network.json(54行)  => Peer Address
-  bins/peer/set-env.sh(2行) => Orderer Address
-  bins/peer/core.yaml(27行取消註解 33行取消註解 改ip 39行改 ip)
+  orderer 設定 - configtx.yaml(58, 71行) => Orderer Address  
+  anchor peer 設定 - configtx.yaml(58, 71行) => Peer Address  
+  explorer 設定 - first-network.json(54行)  => Peer Address
+  peer 與 orderer 連結（擇一） - bins/peer/set-env.sh(2行) => Orderer Address
+  peer 與 orderer 連結（擇一） - bins/peer/core.yaml(27行取消註解 33行取消註解 改ip 39行改 ip)
 
 6. mkdir artefacts
 
