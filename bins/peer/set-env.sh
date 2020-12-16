@@ -4,9 +4,9 @@ export ORDERER_ADDRESS=54.219.75.228:7050
 export FABRIC_LOGGING_SPEC=info
 
 export CORE_PEER_TLS_ENABLED=true
-export CORE_PEER_TLS_CERT=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.crt
-export CORE_PEER_TLS_KEY=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.key
-export CORE_PEER_TLS_ROOTCERT=${PWD}/crypto-config/peerOrganizations/default.com/msp/tlscacerts/ca.crt
+export CORE_PEER_TLS_CERT_FILE=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.crt
+export CORE_PEER_TLS_KEY_FILE=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/server.key
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/crypto-config/peerOrganizations/default.com/msp/tlscacerts/ca.crt
 
 export CORE_PEER_LOCALMSPID=DefaultMSP
 
