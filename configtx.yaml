@@ -55,7 +55,7 @@ Organizations:
           Rule: "OR('DefaultMSP.member')"
     AnchorPeers:
       # Not sure should UPDATE THE IP ADDRESS?
-      - Host: peer.default.com
+      - Host: 54.219.75.228
         Port: 7051
 
   - &Asus
@@ -80,7 +80,7 @@ Organizations:
             # Any member can act as an endorser
             Rule: "OR('AsusMSP.member')"
       AnchorPeers:
-        - Host: peer.asus.com
+        - Host: 54.219.75.228
           Port: 7051
 
   
@@ -88,19 +88,19 @@ Organizations:
 #   ORDERER
 Orderer: &OrdererDefaults
 
-  OrdererType: solo
+  OrdererType: etcdraft
   # should use etcdraft
 
   Addresses:
     # UPDATE THE IP ADDRESS
-    -  10.110.203.155:7050
+    -  54.219.75.228:7050
 
-  # EtcdRaft:
-  #     Consenters:
-      # - Host: orderer.default.com
-      #   Port: 7050
-      #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-      #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+  EtcdRaft:
+      Consenters:
+      - Host: orderer.default.com
+        Port: 7050
+        ClientTLSCert: ./crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls/server.crt
+        ServerTLSCert: ./crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls/server.crt
 # Policies for Orderer
   Policies:
     Readers:

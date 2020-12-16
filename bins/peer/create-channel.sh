@@ -4,4 +4,4 @@ source $PWD/bins/peer/set-env.sh
 export CHANNEL_TX_FILE=${PWD}/artefacts/default-channel.tx
 
 # Execute the channel create command
-peer channel create -o $ORDERER_ADDRESS -c $1 -f $CHANNEL_TX_FILE
+peer channel create -o $ORDERER_ADDRESS -c $1 -f $CHANNEL_TX_FILE --tls --cafile $ORDERER_CA

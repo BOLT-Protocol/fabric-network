@@ -72,7 +72,7 @@ General:
 
     # TLS: TLS settings for the GRPC server.
     TLS:
-        Enabled: false
+        Enabled: true
         PrivateKey: ./server.key
         Certificate: ./server.crt
         RootCAs:
@@ -184,8 +184,8 @@ Consensus:
 
     # WALDir specifies the location at which Write Ahead Logs for etcd/raft are
     # stored. Each channel will have its own subdir named after channel ID.
-    WALDir: /var/hyperledger/production/orderer/etcdraft/wal
+    WALDir: ~/workspace/fabric-network/production/orderer/etcdraft/wal
 
     # SnapDir specifies the location at which snapshots for etcd/raft are
     # stored. Each channel will have its own subdir named after channel ID.
-    SnapDir: /var/hyperledger/production/orderer/etcdraft/snapshot
+    SnapDir: ~/workspace/fabric-network/production/orderer/etcdraft/snapshot

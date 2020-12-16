@@ -11,6 +11,9 @@ CA_IMAGETAG="latest"
 source scriptUtils.sh
 
 function createOrgs() {
+    # arg1=$2
+    # arg2=$3
+    # arg3=$4
     infoln "Generate certificates using Fabric CA's"
 
     IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
@@ -28,15 +31,15 @@ function createOrgs() {
 
         infoln "Create DefaultOrg Identities"
 
-        createDefaultOrg
+        createDefaultOrg $2 #$arg1
 
         infoln "Create AsusOrg Identities"
 
-        createAsusOrg
+        createAsusOrg $3 #$arg2
 
         infoln "Create OrdererOrg Identities"
 
-        createOrderer
+        createOrderer $4 #$arg3
 
     # infoln "Generate CCP files for Org1 and Org2"
 
@@ -105,18 +108,18 @@ if [ ! -z $1 ]; then
     if [ $1 == "down" ]; then
         infoln "====> docker kill && remove ca"
         IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA down --remove-orphans 2>&1
-        mkdir -p ./crypto-config/tmp/fabric-ca/asusOrg
-        mkdir -p ./crypto-config/tmp/fabric-ca/defaultOrg
-        mkdir -p ./crypto-config/tmp/fabric-ca/ordererOrg
-        rm -rf crypto-config/ordererOrganizations && rm -rf crypto-config/peerOrganizations
-        cp ./crypto-config/fabric-ca/registerEnroll.sh ./crypto-config/tmp/fabric-ca/registerEnroll.sh
-        cp ./crypto-config/fabric-ca/asusOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/asusOrg/fabric-ca-server-config.yaml
-        cp ./crypto-config/fabric-ca/defaultOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/defaultOrg/fabric-ca-server-config.yaml
-        cp ./crypto-config/fabric-ca/ordererOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/ordererOrg/fabric-ca-server-config.yaml
-        rm -Rf ./crypto-config/fabric-ca/
-        rm -f ./artefacts/*
-        mv -f ./crypto-config/tmp/fabric-ca/ ./crypto-config/
-        rm -Rf ./crypto-config/tmp/
+        sudo mkdir -p ./crypto-config/tmp/fabric-ca/asusOrg
+        sudo mkdir -p ./crypto-config/tmp/fabric-ca/defaultOrg
+        sudo mkdir -p ./crypto-config/tmp/fabric-ca/ordererOrg
+        sudo rm -rf crypto-config/ordererOrganizations && rm -rf crypto-config/peerOrganizations
+        sudo cp ./crypto-config/fabric-ca/registerEnroll.sh ./crypto-config/tmp/fabric-ca/registerEnroll.sh
+        sudo cp ./crypto-config/fabric-ca/asusOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/asusOrg/fabric-ca-server-config.yaml
+        sudo cp ./crypto-config/fabric-ca/defaultOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/defaultOrg/fabric-ca-server-config.yaml
+        sudo cp ./crypto-config/fabric-ca/ordererOrg/fabric-ca-server-config.yaml ./crypto-config/tmp/fabric-ca/ordererOrg/fabric-ca-server-config.yaml
+        sudo rm -Rf ./crypto-config/fabric-ca/
+        sudo rm -f ./artefacts/*
+        sudo mv -f ./crypto-config/tmp/fabric-ca/ ./crypto-config/
+        sudo rm -Rf ./crypto-config/tmp/
     fi
 else
     echo 'Use ./gen-crypto.sh   up      to regenerate the crypto'
