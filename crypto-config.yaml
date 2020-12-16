@@ -1,31 +1,63 @@
-# The default template
-# If edit this file, should edit gen-crypto.sh either
-
+# crypto-config
+# ---------------------------------------------------------------------------
+# "OrdererOrgs" - Definition of organizations managing orderer nodes
+# ---------------------------------------------------------------------------
 OrdererOrgs:
-  - Name: Orderer
-    Domain: default.com
-    #EnableNodeOUs: true
+  # ---------------------------------------------------------------------------
+  # Orderer
+  # ---------------------------------------------------------------------------
+  - Name: Groeifabriek
+    Domain: groeifabriek.nl
+    EnableNodeOUs: true
     Specs:
-      - Hostname: orderer
-      
+      - CommonName: fabric-orderer-5hfA94j0.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j1.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j2.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j3.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j4.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j5.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j6.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j7.baas.twcc.ai
+      - CommonName: fabric-orderer-5hfA94j8.baas.twcc.ai
+# ---------------------------------------------------------------------------
+# "PeerOrgs" - Definition of organizations managing peer nodes
+# ---------------------------------------------------------------------------
 PeerOrgs:
-  - Name: Default
-    Domain: default.com
-    #EnableNodeOUs: true
+  - Name: Karga
+    Domain: aptalkarga.tr
+    EnableNodeOUs: true
     Specs:
-      - Hostname: default
-        CommonName: devpeer
+      - CommonName: "fabric-peer-5hfA94j0.tn.baas.twcc.ai"
+      - CommonName: "fabric-peer-5hfA94j1.tn.baas.twcc.ai"     
+      - CommonName: "fabric-peer-5hfA94j2.tn.baas.twcc.ai"
     Users:
-      Count: 2
+      Count: 1
+  - Name: Nevergreen
+    Domain: nevergreen.nl
+    EnableNodeOUs: true
+    Specs:
+      - CommonName: "fabric-peer-5hfA94j0.hc.baas.twcc.ai"
+      - CommonName: "fabric-peer-5hfA94j1.hc.baas.twcc.ai"
+      - CommonName: "fabric-peer-5hfA94j2.hc.baas.twcc.ai"
+    Users:
+      Count: 1
+  - Name: Atlantis
+    Domain: atlantis.com
+    Prefix: fabric-peer-5hfA94j
+    EnableNodeOUs: true
+    Specs:
+      - CommonName: "fabric-peer-5hfA94j0.baas.twcc.ai"
+      - CommonName: "fabric-peer-5hfA94j1.baas.twcc.ai"
+      - CommonName: "fabric-peer-5hfA94j2.baas.twcc.ai"
+    Users:
+      Count: 1
   - Name: Asus
     Domain: asus.com
+    EnableNodeOUs: true
     Template:
-      Count: 3
+      Count: 1
     Users:
-      Count: 2
-
-
-
+      Count: 1
       
 
       
