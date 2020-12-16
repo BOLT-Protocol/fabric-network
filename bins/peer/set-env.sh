@@ -10,5 +10,5 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/crypto-config/peerOrganizations/defaul
 export CORE_PEER_LOCALMSPID=DefaultMSP
 # Admin identity used for commands
 export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/default.com/users/Admin@default.com/msp
-export CORE_PEER_ADDRESS=54.219.75.228:7051
+export CORE_PEER_ADDRESS=0.0.0.0:7051
 export FABRIC_CFG_PATH=${PWD}/bins/peer
