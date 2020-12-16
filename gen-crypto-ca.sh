@@ -11,6 +11,9 @@ CA_IMAGETAG="latest"
 source scriptUtils.sh
 
 function createOrgs() {
+    # arg1=$2
+    # arg2=$3
+    # arg3=$4
     infoln "Generate certificates using Fabric CA's"
 
     IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
@@ -28,15 +31,15 @@ function createOrgs() {
 
         infoln "Create DefaultOrg Identities"
 
-        createDefaultOrg $2
+        createDefaultOrg $2 #$arg1
 
         infoln "Create AsusOrg Identities"
 
-        createAsusOrg $3
+        createAsusOrg $3 #$arg2
 
         infoln "Create OrdererOrg Identities"
 
-        createOrderer $4
+        createOrderer $4 #$arg3
 
     # infoln "Generate CCP files for Org1 and Org2"
 
