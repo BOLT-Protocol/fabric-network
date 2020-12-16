@@ -51,7 +51,7 @@
 			"tlsCACerts": {
 				"path": "/tmp/crypto/peerOrganizations/default.com/peers/devpeer/tls/ca.crt"
 			},
-			"url": "grpc://10.110.203.155:7051"
+			"url": "grpc://54.219.75.228:7051"
 		}
 	}
 }
