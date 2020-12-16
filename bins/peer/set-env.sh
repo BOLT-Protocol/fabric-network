@@ -13,6 +13,7 @@ export CORE_PEER_LOCALMSPID=DefaultMSP
 export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/msp
 export CORE_PEER_ADDRESS=0.0.0.0:7051
 export FABRIC_CFG_PATH=${PWD}/bins/peer
+export ORDERER_CA=${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/msp/tlscacerts/tlsca.default.com-cert.pem
 
 
 

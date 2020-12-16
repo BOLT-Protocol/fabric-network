@@ -54,14 +54,14 @@ function createDefaultOrg() {
   
   infoln "Generate the devpeer msp"
   set -x
-  fabric-ca-client enroll -u https://devpeer:devpeerpw@localhost:7054 --caname ca-default -M ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/msp --csr.hosts "devpeer.default.com" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/defaultOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://devpeer:devpeerpw@localhost:7054 --caname ca-default -M ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/msp --csr.hosts "devpeer.default.com, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/defaultOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/default.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/msp/config.yaml
 
   infoln "Generate the devpeer certificates"
   set -x
-  fabric-ca-client enroll -u https://devpeer:devpeerpw@localhost:7054 --caname ca-default -M ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls --enrollment.profile tls --csr.hosts "devpeer.default.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/defaultOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://devpeer:devpeerpw@localhost:7054 --caname ca-default -M ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls --enrollment.profile tls --csr.hosts "devpeer.default.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/defaultOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/default.com/peers/devpeer/tls/ca.crt
@@ -175,14 +175,14 @@ function createAsusOrg() {
 
   infoln "Generate the peer0 msp"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/msp --csr.hosts "peer0.asus.com" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/msp --csr.hosts "peer0.asus.com, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/msp/config.yaml
 
   infoln "Generate the peer0-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/tls --enrollment.profile tls --csr.hosts "peer0.asus.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/tls --enrollment.profile tls --csr.hosts "peer0.asus.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer0.asus.com/tls/ca.crt
@@ -202,14 +202,14 @@ function createAsusOrg() {
 
   infoln "Generate the peer1 msp"
   set -x
-  fabric-ca-client enroll -u https://peer1:peer1pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/msp --csr.hosts "peer1.asus.com" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer1:peer1pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/msp --csr.hosts "peer1.asus.com, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/msp/config.yaml
 
   infoln "Generate the peer1-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer1:peer1pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/tls --enrollment.profile tls --csr.hosts "peer1.asus.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer1:peer1pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/tls --enrollment.profile tls --csr.hosts "peer1.asus.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer1.asus.com/tls/ca.crt
@@ -220,14 +220,14 @@ function createAsusOrg() {
 
   infoln "Generate the peer2 msp"
   set -x
-  fabric-ca-client enroll -u https://peer2:peer2pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/msp --csr.hosts "peer2.asus.com" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer2:peer2pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/msp --csr.hosts "peer2.asus.com, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/msp/config.yaml
 
   infoln "Generate the peer2-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer2:peer2pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/tls --enrollment.profile tls --csr.hosts "peer2.asus.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://peer2:peer2pw@localhost:8054 --caname ca-asus -M ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/tls --enrollment.profile tls --csr.hosts "peer2.asus.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/asusOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/asus.com/peers/peer2.asus.com/tls/ca.crt
@@ -309,14 +309,14 @@ function createOrderer() {
 
   infoln "Generate the orderer msp"
   set -x
-  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/msp --csr.hosts "orderer.default.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/ordererOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/msp --csr.hosts "orderer.default.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/ordererOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/ordererOrganizations/default.com/msp/config.yaml ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/msp/config.yaml
 
   infoln "Generate the orderer-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls --enrollment.profile tls --csr.hosts "orderer.default.com, localhost" --csr.hosts "54.219.75.228" --tls.certfiles ${PWD}/crypto-config/fabric-ca/ordererOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca-orderer -M ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls --enrollment.profile tls --csr.hosts "orderer.default.com, localhost, $1" --tls.certfiles ${PWD}/crypto-config/fabric-ca/ordererOrg/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls/tlscacerts/* ${PWD}/crypto-config/ordererOrganizations/default.com/orderers/orderer.default.com/tls/ca.crt
